@@ -6,6 +6,6 @@ import (
 )
 
 var RegisterMusicStoreRoutes = func(router *mux.Router) {
-	router.HandleFunc("/song/", songs.CreateSong).Methods("POST")
+	songs.RegisterSongsRoutes(router)
 
 }

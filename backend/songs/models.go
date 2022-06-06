@@ -12,7 +12,6 @@ type Song struct {
 	Name   string `gorm: "" json: "name"`
 	Artist string `json: "artist"`
 	Album  string `json: "artist"`
-	// ReleaseDate string `json: "releaseData`
 }
 
 func init() {
@@ -26,4 +25,23 @@ func (s *Song) CreateSong() *Song {
 	db.Create(&s)
 
 	return s
+}
+
+func GetAllSongs() []Song {
+	var Songs []Song
+	db.Find(&Songs)
+	return Songs
+}
+
+func GetSongByIdModel(Id int64) (*Song, *gorm.DB) {
+	var getSong Song
+	db := db.Where("ID=?", Id).Find(&getSong)
+	return &getSong, db
+}
+
+func DeleteSongModel(ID int64) Song {
+	var song Song
+	db.Where("ID=?", ID).Delete(song)
+	return song
+
 }
